@@ -42,6 +42,18 @@ Do not commit real credentials. The inquiry form reports an error instead of ind
 
 Attachments are limited to 8 MB and accepted only as PDF, image, or Office document files. They are emailed to the support mailbox and are not written to a publicly accessible folder.
 
+## Deploy a free preview on Render
+
+1. Create a Render Web Service from the GitHub repository `Mostafaomar88/isca` and select the `main` branch.
+2. Select the **Free** instance type and use:
+   - Build command: `pip install -r requirements.txt`
+   - Start command: `gunicorn app:app`
+3. Add `APP_ENV=production` and a randomly generated `SECRET_KEY` environment variable in Render. Do not put secrets in GitHub.
+4. Optionally add the `MAIL_*` settings from `.env.example` if the inquiry form should send email. Without SMTP credentials, the rest of the website remains available, but inquiry delivery reports an error.
+5. Deploy and open the generated `*.onrender.com` URL. Free web services may take time to wake after inactivity.
+
+The root `Procfile` also declares the Gunicorn start command for compatible deployment providers.
+
 ## Tests
 
 Run the application tests with `python -m unittest discover -s tests`.

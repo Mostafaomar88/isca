@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero section">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-mark"></span>{{ page.eyebrow }}</p>
+    <h1>{{ page.heading }}</h1>
+    <p class="section-intro">{{ page.intro }}</p>
+  </div>
+</section>
+<section class="contact section">
+  <div class="container contact-grid">
+    <div class="contact-copy">
+      <p class="eyebrow"><span class="eyebrow-mark"></span>{{ texts.contact_email_label }}</p>
+      <div class="contact-email">
+        <span class="email-icon" aria-hidden="true">@</span>
+        <div>
+          <span class="card-kicker">{{ texts.contact_email_label }}</span>
+          <a href="mailto:support@isca-eg.com">support@isca-eg.com</a>
+          <span>{{ texts.contact_email_note }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-panel">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-list" aria-live="polite">
+            {% for category, message in messages %}
+              <p class="flash-message flash-{{ category }}" role="{{ 'status' if category == 'success' else 'alert' }}">
+                {{ message }}
+                {% if category == 'error' and texts.form_error in message %}
+                  <a href="mailto:support@isca-eg.com">support@isca-eg.com</a>
+                {% endif %}
+              </p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% include "_contact_form.html" %}
+    </div>
+  </div>
+</section>
+{% endblock %}

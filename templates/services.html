@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero section">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-mark"></span>{{ page.eyebrow }}</p>
+    <h1>{{ page.heading }}</h1>
+    <p class="section-intro">{{ page.intro }}</p>
+  </div>
+</section>
+<section class="page-body services section">
+  <div class="container">
+    <div class="service-grid">
+      {% for service in services %}
+      <article class="service-card">
+        <img class="service-card-image" src="{{ url_for('static', filename='images/services/' + service.image.filename) }}" alt="{{ service.image.alt }}" loading="lazy" decoding="async">
+        <span class="service-number">{{ "%02d"|format(loop.index) }}</span>
+        <div class="service-arrow" aria-hidden="true">↗</div>
+        <h2>{{ service.title }}</h2>
+        <p>{{ service.description }}</p>
+        <a href="{{ url_for('service_detail', service_slug=service.slug, lang=language) }}" class="service-link">{{ page.detail_label }} <span aria-hidden="true">↗</span></a>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="service-disclaimer">{{ texts.services_disclaimer }}</p>
+  </div>
+</section>
+{% endblock %}

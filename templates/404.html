@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero section">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-mark"></span>404</p>
+    <h1>{{ "الصفحة غير موجودة" if language == "ar" else "Page not found" }}</h1>
+    <p class="section-intro">{{ "عذرًا، لم نتمكن من العثور على الصفحة المطلوبة." if language == "ar" else "Sorry, we couldn't find the page you requested." }}</p>
+    <a class="button button-primary" href="{{ url_for('home', lang=language) }}">{{ texts.nav_home }}</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero section">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-mark"></span>{{ page.eyebrow }}</p>
+    <h1>{{ page.heading }}</h1>
+    <p class="section-intro">{{ page.intro }}</p>
+  </div>
+</section>
+<section class="page-body section">
+  <div class="container content-column">
+    <article class="content-card">
+      <span class="card-kicker">{{ page.programs_heading }}</span>
+      <ul class="topic-list">
+        <li>{{ page.program_one }}</li>
+        <li>{{ page.program_two }}</li>
+        <li>{{ page.program_three }}</li>
+      </ul>
+      <p>{{ page.note }}</p>
+    </article>
+    <div class="service-image-gallery training-gallery">
+      {% for image in training_images %}
+      <img src="{{ url_for('static', filename='images/services/' + image.filename) }}" alt="{{ image.alt }}" loading="lazy" decoding="async">
+      {% endfor %}
+    </div>
+    <a class="button button-primary" href="{{ url_for('contact_page', lang=language, service='training') }}">{{ page.register }} <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+{% endblock %}

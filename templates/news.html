@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero section">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-mark"></span>{{ page.eyebrow }}</p>
+    <h1>{{ page.heading }}</h1>
+    <p class="section-intro">{{ page.intro }}</p>
+  </div>
+</section>
+<section class="page-body section">
+  <div class="container content-column">
+    <article class="content-card empty-state">
+      <span class="vision-icon" aria-hidden="true">✳</span>
+      <p>{{ page.empty }}</p>
+    </article>
+  </div>
+</section>
+{% endblock %}

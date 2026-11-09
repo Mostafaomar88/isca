@@ -1,0 +1,49 @@
+<form action="{{ url_for('contact_page', lang=language) }}" method="post" enctype="multipart/form-data" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="honeypot" aria-hidden="true">
+    <label for="website">Website</label>
+    <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+  </div>
+  <div class="form-row">
+    <div class="form-field">
+      {{ form.name.label }}
+      {{ form.name(class_="form-control", placeholder=texts.form_name_placeholder, autocomplete="name", required=true, maxlength="120") }}
+      {% for error in form.name.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+    </div>
+    <div class="form-field">
+      {{ form.company.label }}
+      {{ form.company(class_="form-control", placeholder=texts.form_company_placeholder, autocomplete="organization", maxlength="160") }}
+      {% for error in form.company.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-field">
+      {{ form.email.label }}
+      {{ form.email(class_="form-control", placeholder=texts.form_email_placeholder, autocomplete="email", required=true, maxlength="254", dir="ltr") }}
+      {% for error in form.email.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+    </div>
+    <div class="form-field">
+      {{ form.phone.label }}
+      {{ form.phone(class_="form-control", placeholder=texts.form_phone_placeholder, autocomplete="tel", maxlength="40") }}
+      {% for error in form.phone.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+    </div>
+  </div>
+  <div class="form-field">
+    {{ form.service.label }}
+    {{ form.service(class_="form-control", required=true) }}
+    {% for error in form.service.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+  </div>
+  <div class="form-field">
+    {{ form.message.label }}
+    {{ form.message(class_="form-control form-textarea", placeholder=texts.form_message_placeholder, required=true, maxlength="3000", rows="4") }}
+    {% for error in form.message.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+  </div>
+  <div class="form-field file-field">
+    {{ form.attachment.label }}
+    {{ form.attachment(class_="form-control form-file", accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx") }}
+    <span class="field-note">{{ texts.form_file_note }}</span>
+    {% for error in form.attachment.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+  </div>
+  <button class="button button-primary form-submit" type="submit">{{ texts.form_submit }} <span aria-hidden="true">↗</span></button>
+  <p class="form-privacy">{{ texts.form_privacy }}</p>
+</form>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero section">
+  <div class="container page-hero-inner">
+    <a class="breadcrumb-link" href="{{ url_for('services', lang=language) }}">← {{ page.back }}</a>
+    <p class="eyebrow"><span class="eyebrow-mark"></span>{{ page.eyebrow }}</p>
+    <h1>{{ service.title }}</h1>
+    <p class="section-intro">{{ service.description }}</p>
+    <div class="service-image-gallery">
+      {% for image in service.images %}
+      <img src="{{ url_for('static', filename='images/services/' + image.filename) }}" alt="{{ image.alt }}" loading="lazy" decoding="async">
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="page-body section">
+  <div class="container content-column">
+    <article class="content-card">
+      <span class="card-kicker">{{ page.detail_label }}</span>
+      <p class="body-large">{{ service.description }}</p>
+      {% if service_slug == "iso-certification-readiness" %}
+      <p class="service-disclaimer">{{ page.iso_note }}</p>
+      {% endif %}
+    </article>
+    <a class="button button-primary" href="{{ url_for('contact_page', lang=language, service='training' if service_slug == 'training-and-coaching' else 'kitchen_design' if service_slug == 'commercial-kitchen-design' else 'consultation') }}">{{ page.contact }} <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+{% endblock %}

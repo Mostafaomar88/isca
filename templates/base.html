@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="{{ language }}" dir="{{ 'rtl' if language == 'ar' else 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description }}">
+  <meta name="theme-color" content="#102a36">
+  <title>{{ page.title }} | ISCA</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/logo.jpeg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <script src="{{ url_for('static', filename='js/site.js') }}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ texts.skip_link }}</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('home', lang=language) }}" aria-label="ISCA — {{ texts.nav_home }}">
+        <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="ISCA — International Sustainable Consulting Agency">
+      </a>
+      <nav class="primary-nav" id="primary-nav" aria-label="{{ texts.nav_label }}">
+        <a href="{{ url_for('home', lang=language) }}" {% if request.endpoint == 'home' %}aria-current="page"{% endif %}>{{ texts.nav_home }}</a>
+        <a href="{{ url_for('about', lang=language) }}" {% if request.endpoint == 'about' %}aria-current="page"{% endif %}>{{ texts.nav_about }}</a>
+        <a href="{{ url_for('services', lang=language) }}" {% if request.endpoint in ('services', 'service_detail') %}aria-current="page"{% endif %}>{{ texts.nav_services }}</a>
+        <a href="{{ url_for('training', lang=language) }}" {% if request.endpoint == 'training' %}aria-current="page"{% endif %}>{{ texts.nav_training }}</a>
+        <a href="{{ url_for('news', lang=language) }}" {% if request.endpoint == 'news' %}aria-current="page"{% endif %}>{{ texts.nav_news }}</a>
+        <a class="nav-cta" href="{{ url_for('contact_page', lang=language) }}" {% if request.endpoint == 'contact_page' %}aria-current="page"{% endif %}>{{ texts.nav_contact }}</a>
+      </nav>
+      <div class="header-actions">
+        <a class="language-switch" href="{{ request.path }}?lang={{ 'en' if language == 'ar' else 'ar' }}" lang="{{ 'en' if language == 'ar' else 'ar' }}" aria-label="{{ texts.language_switch_label }}">{{ texts.language_switch }}</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="{{ texts.menu_label }}" data-open-label="{{ texts.menu_label }}" data-close-label="{{ texts.menu_close_label }}">
+        <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="footer-brand" href="{{ url_for('home', lang=language) }}">ISCA<span> · {{ texts.footer_tagline }}</span></a>
+      <p>© {{ year }} ISCA. {{ texts.footer_rights }} <span>{{ texts.footer_founded }}</span></p>
+    </div>
+  </footer>
+</body>
+</html>
